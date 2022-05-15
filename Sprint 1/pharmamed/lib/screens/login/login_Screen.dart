@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:pharmamed/screens/login/textField.dart';
+import 'package:pharmamed/app/route.dart';
+import 'package:pharmamed/screens/login/login_body.dart';
+import 'package:pharmamed/screens/login/login_viewModel.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -17,14 +19,14 @@ class _LoginState extends State<Login> {
     return Scaffold(
       backgroundColor: HexColor('#EBF7FF'),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Body.headerTxt(),
-          Body.instructionTxt(),
-          Body.txtField(),
-          Body.forgotPassText(),
-          Body.button(),
-          Body.signupText()
+          LoginBody.headerTxt(),
+          LoginBody.instructionTxt(),
+          LoginBody.txtField(),
+          LoginBody.forgotPassText(),
+          LoginBody.button(context),
+          LoginBody.signupText(),
         ],
       ),
     );

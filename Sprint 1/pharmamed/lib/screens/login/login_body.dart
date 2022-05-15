@@ -3,9 +3,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:pharmamed/screens/login/login_viewModel.dart';
+import 'package:pharmamed/services/login_services/login_service.dart';
 
-class Body {
+class LoginBody {
   static final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
     onPrimary: Colors.white,
     primary: HexColor('#0D5F96'),
@@ -21,17 +22,19 @@ class Body {
       padding: const EdgeInsets.only(top: 45),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
+        children: [
           Padding(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: TextField(
-                decoration: InputDecoration(hintText: 'Email'),
+                decoration: const InputDecoration(hintText: 'Email'),
+                controller: LoginViewModel.emailController,
               )),
           Padding(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: TextField(
-                decoration: InputDecoration(hintText: 'Password'),
+                decoration: const InputDecoration(hintText: 'Password'),
                 obscureText: true,
+                controller: LoginViewModel.passwordController,
               ))
         ],
       ),
@@ -64,12 +67,14 @@ class Body {
     );
   }
 
-  static Widget button() {
+  static Widget button(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: ElevatedButton(
           style: raisedButtonStyle,
-          onPressed: () {},
+          onPressed: () {
+            LoginViewModel.login(context);
+          },
           child: const Text(
             'Login',
             style: TextStyle(fontSize: 18),
@@ -96,7 +101,7 @@ class Body {
 
   static Widget signupText() {
     return Padding(
-      padding: const EdgeInsets.only(top: 150, bottom: 30),
+      padding: const EdgeInsets.only(top: 50, bottom: 30),
       child: RichText(
         text: TextSpan(children: [
           const TextSpan(
