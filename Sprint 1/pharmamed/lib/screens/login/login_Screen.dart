@@ -24,7 +24,7 @@ class _LoginState extends State<Login> {
           LoginBody.headerTxt(),
           LoginBody.instructionTxt(),
           LoginBody.txtField(),
-          LoginBody.forgotPassText(),
+          LoginBody.forgotPassText(context),
           LoginBody.button(context),
           LoginBody.signupText(),
         ],

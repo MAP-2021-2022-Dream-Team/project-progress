@@ -4,6 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pharmamed/screens/login/login_viewModel.dart';
+import 'package:pharmamed/screens/reset_password_page/reset_pass_screen.dart';
 import 'package:pharmamed/services/login_services/login_service.dart';
 
 class LoginBody {
@@ -82,7 +83,7 @@ class LoginBody {
     );
   }
 
-  static Widget forgotPassText() {
+  static Widget forgotPassText(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(20),
       child: RichText(
@@ -92,7 +93,10 @@ class LoginBody {
               style: const TextStyle(color: Colors.lightBlueAccent),
               recognizer: TapGestureRecognizer()
                 ..onTap = () async {
-                  // launchUrl();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ForgotPassScreen()));
                 })
         ]),
       ),

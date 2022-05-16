@@ -13,8 +13,8 @@ abstract class LoginService {
       Fluttertoast.showToast(
           msg: error,
           gravity: ToastGravity.CENTER,
-          fontSize: 20,
-          timeInSecForIosWeb: 30);
+          fontSize: 25,
+          timeInSecForIosWeb: 80);
     }
   }
 }
