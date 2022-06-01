@@ -42,12 +42,12 @@ class ForgotPassBody {
     );
   }
 
-  static Widget button(BuildContext context) {
+  static Widget button(BuildContext context, ForgotPassViewModel model) {
     return Padding(
       padding: const EdgeInsets.all(25),
       child: ElevatedButton(
         onPressed: () {
-          ForgotPassViewModel.resetPassword(context);
+          model.resetPassword(context);
         },
         child: const Text("Reset Password"),
         style: LoginBody.raisedButtonStyle,
@@ -74,6 +74,18 @@ class ForgotPassBody {
                 })
         ]),
       ),
+    );
+  }
+
+  static Widget body(BuildContext context, ForgotPassViewModel model) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        text(),
+        emailEntry(),
+        button(context, model),
+        loginText(context)
+      ],
     );
   }
 }

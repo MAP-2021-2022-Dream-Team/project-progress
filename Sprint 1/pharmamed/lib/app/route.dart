@@ -26,3 +26,14 @@ class Routers {
     }
   }
 }
+
+
+// @StackedApp(routes: [
+//   MaterialRoute(page: Login),
+//   MaterialRoute(page: ForgotPassScreen),
+//   MaterialRoute(page: BuyerLandingPage),
+//   MaterialRoute(page: SellerLandingPage)
+// ], dependencies: [
+//   LazySingleton(classType: NavigationService),
+// ])
+// class AppSetup {}

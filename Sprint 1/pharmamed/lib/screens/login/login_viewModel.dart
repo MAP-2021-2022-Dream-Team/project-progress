@@ -9,14 +9,17 @@ import 'package:pharmamed/screens/seller_landing_lage/seller_landing_screen.dart
 import 'package:pharmamed/services/login_services/login_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class LoginViewModel {
+import 'package:stacked/stacked.dart';
+
+class LoginViewModel extends BaseViewModel {
   static final emailController = TextEditingController();
   static final passwordController = TextEditingController();
 
-  static void login(BuildContext context) async {
+  void login(BuildContext context) async {
     await LoginService.signIn();
     // roleDetector(context);
     // await FirebaseAuth.instance.authStateChanges();
+
     const MyApp();
   }
 
@@ -31,7 +34,6 @@ class LoginViewModel {
           MaterialPageRoute(
             builder: (context) => const BuyerLandingPage(),
           ));
-      // Routers.route(Routers.buyerLandingPath, context);
     } else if (users.role == "seller") {
       Navigator.push(
           context,
@@ -41,3 +43,36 @@ class LoginViewModel {
     }
   }
 }
+
+// class LoginViewModel {
+//   static final emailController = TextEditingController();
+//   static final passwordController = TextEditingController();
+
+//   static void login(BuildContext context) async {
+//     await LoginService.signIn();
+//     // roleDetector(context);
+//     // await FirebaseAuth.instance.authStateChanges();
+//     const MyApp();
+//   }
+
+//   static void roleDetector(BuildContext context) async {
+//     final String user = FirebaseAuth.instance.currentUser!.uid;
+//     final doc = await FirebaseFirestore.instance.doc('user/$user').get();
+//     final users = Users.fromJson(doc.data()!);
+
+//     if (users.role == "buyer") {
+//       Navigator.push(
+//           context,
+//           MaterialPageRoute(
+//             builder: (context) => const BuyerLandingPage(),
+//           ));
+//       // Routers.route(Routers.buyerLandingPath, context);
+//     } else if (users.role == "seller") {
+//       Navigator.push(
+//           context,
+//           MaterialPageRoute(
+//             builder: (context) => const SellerLandingPage(),
+//           ));
+//     }
+//   }
+// }

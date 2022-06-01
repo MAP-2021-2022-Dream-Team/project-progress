@@ -3,10 +3,12 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pharmamed/main.dart';
 import 'package:pharmamed/services/login_services/forgot_pass_services/forgot_pass_service.dart';
 
-class ForgotPassViewModel {
+import 'package:stacked/stacked.dart';
+
+class ForgotPassViewModel extends BaseViewModel {
   static final resetPassEmailController = TextEditingController();
 
-  static void resetPassword(BuildContext context) {
+  void resetPassword(BuildContext context) {
     ForgotPassService.resetPass();
 
     Fluttertoast.showToast(

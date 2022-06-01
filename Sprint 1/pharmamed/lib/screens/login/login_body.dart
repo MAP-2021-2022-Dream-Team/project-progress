@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pharmamed/screens/login/login_viewModel.dart';
 import 'package:pharmamed/screens/reset_password_page/reset_pass_screen.dart';
-import 'package:pharmamed/services/login_services/login_service.dart';
 
 class LoginBody {
   static final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
@@ -68,13 +67,13 @@ class LoginBody {
     );
   }
 
-  static Widget button(BuildContext context) {
+  static Widget button(BuildContext context, LoginViewModel model) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: ElevatedButton(
           style: raisedButtonStyle,
           onPressed: () {
-            LoginViewModel.login(context);
+            model.login(context);
           },
           child: const Text(
             'Login',
@@ -121,6 +120,20 @@ class LoginBody {
                 })
         ]),
       ),
+    );
+  }
+
+  static Widget body(BuildContext context, LoginViewModel model) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        headerTxt(),
+        instructionTxt(),
+        txtField(),
+        forgotPassText(context),
+        button(context, model),
+        signupText(),
+      ],
     );
   }
 }

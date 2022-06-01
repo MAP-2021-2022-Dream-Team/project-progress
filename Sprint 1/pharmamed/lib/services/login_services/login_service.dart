@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:injectable/injectable.dart';
 import 'package:pharmamed/screens/login/login_viewModel.dart';
 
-abstract class LoginService {
+@lazySingleton
+class LoginService {
   static Future signIn() async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -10,6 +12,7 @@ abstract class LoginService {
           password: LoginViewModel.passwordController.text.trim());
     } on FirebaseAuthException catch (e) {
       String error = e.message.toString();
+
       Fluttertoast.showToast(
           msg: error,
           gravity: ToastGravity.CENTER,
