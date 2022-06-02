@@ -4,6 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pharmamed/screens/login/login_viewModel.dart';
+import 'package:pharmamed/screens/register/register_Screen.dart';
 import 'package:pharmamed/screens/reset_password_page/reset_pass_screen.dart';
 
 class LoginBody {
@@ -102,23 +103,32 @@ class LoginBody {
     );
   }
 
-  static Widget signupText() {
+  static Widget signupText(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 50, bottom: 30),
       child: RichText(
-        text: TextSpan(children: [
-          const TextSpan(
-              text: "Don't have an account?",
-              style: TextStyle(color: Colors.black)),
-          TextSpan(
+        text: TextSpan(
+          children: [
+            const TextSpan(
+                text: "Don't have an account?",
+                style: TextStyle(color: Colors.black)),
+            TextSpan(
               text: "Sign Up",
               style: TextStyle(
                   color: HexColor('#0D5F96'), fontWeight: FontWeight.bold),
               recognizer: TapGestureRecognizer()
                 ..onTap = () async {
                   // launchUrl();
-                })
-        ]),
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const RegisterPage(),
+                    ),
+                  );
+                },
+            )
+          ],
+        ),
       ),
     );
   }
@@ -132,7 +142,7 @@ class LoginBody {
         txtField(),
         forgotPassText(context),
         button(context, model),
-        signupText(),
+        signupText(context),
       ],
     );
   }
