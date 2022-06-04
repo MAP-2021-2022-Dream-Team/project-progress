@@ -14,7 +14,7 @@ class RegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<RegisterViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
-        body: const Body(),
+        body: RegisterBody.body(context, model),
         backgroundColor: HexColor('#EBF7FF'),
       ),
       viewModelBuilder: () => RegisterViewModel(),
@@ -26,41 +26,40 @@ class RegisterPage extends StatelessWidget {
   }
 }
 
-class Body extends StatelessWidget {
-  const Body({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
+class RegisterBody {
+  static Widget body(BuildContext context, RegisterViewModel model) {
     return Container(
       padding: const EdgeInsets.all(30),
       height: double.infinity,
       width: double.infinity,
-      child: Column(
-        //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          headerTxt(),
-          txt(),
-          nameText(),
-          nameInput(),
-          emailText(),
-          emailInput(),
-          numText(),
-          numInput(),
-          usrText(),
-          usrInput(),
-          pswText(),
-          pswInput(),
-          regButton(),
-          accCheck(context),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            headerTxt(),
+            txt(),
+            nameText(),
+            nameInput(),
+            emailText(),
+            emailInput(),
+            numText(),
+            numInput(),
+            usrText(),
+            usrInput(),
+            pswText(),
+            pswInput(),
+            regButton(context, model),
+            accCheck(context),
+          ],
+        ),
       ),
     );
   }
 
   static Widget headerTxt() {
     return const Padding(
-      padding: EdgeInsets.only(top: 30),
+      padding: EdgeInsets.only(top: 40),
       child: Align(
         alignment: Alignment.center,
         child: Text(
@@ -73,7 +72,7 @@ class Body extends StatelessWidget {
 
   static Widget txt() {
     return const Padding(
-      padding: EdgeInsets.only(top: 5, bottom: 30),
+      padding: EdgeInsets.only(top: 5, bottom: 50),
       child: Align(
         alignment: Alignment.center,
         child: Text(
@@ -230,7 +229,7 @@ class Body extends StatelessWidget {
 
   static Widget pswInput() {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(bottom: 20),
       child: Align(
         alignment: Alignment.center,
         child: TextField(
@@ -249,11 +248,13 @@ class Body extends StatelessWidget {
     );
   }
 
-  static Widget regButton() {
+  static Widget regButton(BuildContext context, RegisterViewModel model) {
     return Padding(
-      padding: const EdgeInsets.all(5),
+      padding: const EdgeInsets.all(20),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          model.register(context);
+        },
         style: ElevatedButton.styleFrom(
             onPrimary: Colors.white, primary: HexColor('#0D5F96')),
         child: const Text('SIGN UP'),
@@ -263,7 +264,7 @@ class Body extends StatelessWidget {
 
   static Widget accCheck(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 1),
+      padding: const EdgeInsets.only(top: 25),
       child: RichText(
         text: TextSpan(
           children: [

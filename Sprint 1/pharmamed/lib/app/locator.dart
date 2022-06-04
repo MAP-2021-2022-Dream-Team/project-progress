@@ -10,4 +10,5 @@ final locator = GetIt.instance;
 void setupLocator() {
   locator.registerLazySingleton(() => LoginService());
   locator.registerLazySingleton(() => NavigationService());
+  locator.registerLazySingleton(() => DialogService());
 }

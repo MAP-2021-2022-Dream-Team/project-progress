@@ -1,19 +1,21 @@
 class Users {
-  dynamic id;
-  dynamic email;
-  dynamic password;
+  dynamic fname;
+  dynamic uname;
+  dynamic phone;
   dynamic role;
 
-  Users(this.email, this.password, this.role);
+  Users(this.fname, this.uname, this.phone, this.role);
 
   Users.fromJson(Map<String, dynamic> json)
-      : email = json['email'],
-        password = json['password'],
+      : fname = json['fname'],
+        uname = json['uname'],
+        phone = json['phone'],
         role = json['role'];
 
   Map<String, dynamic> toJson() => {
-        'email': email,
-        'password': password,
+        'fname': fname,
+        'uname': uname,
+        'phone': phone,
         'role': role,
       };
 }
