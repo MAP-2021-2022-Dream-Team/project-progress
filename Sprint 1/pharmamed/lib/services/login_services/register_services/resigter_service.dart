@@ -10,7 +10,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 @lazySingleton
 class RegisterService {
-  static Future<String> signUp() async {
+  static Future signUp() async {
     try {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
@@ -27,21 +27,9 @@ class RegisterService {
         });
       });
 
-      Fluttertoast.showToast(
-          msg: "Successful SignUp",
-          gravity: ToastGravity.CENTER,
-          fontSize: 25,
-          backgroundColor: Colors.greenAccent,
-          timeInSecForIosWeb: 30000);
-      return "Successful SignUp";
-    } catch (e) {
-      Fluttertoast.showToast(
-          msg: e.toString(),
-          gravity: ToastGravity.CENTER,
-          fontSize: 25,
-          backgroundColor: Colors.redAccent,
-          timeInSecForIosWeb: 30000);
-      return e.toString();
+      RegisterViewModel.feedback = "Successful SignUp";
+    } on FirebaseAuthException catch (e) {
+      RegisterViewModel.feedback = e.toString();
     }
   }
 }

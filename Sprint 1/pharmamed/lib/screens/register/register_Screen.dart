@@ -2,6 +2,7 @@
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pharmamed/screens/login/login_Screen.dart';
 import 'package:pharmamed/screens/register/register_viewModel.dart';
@@ -289,5 +290,23 @@ class RegisterBody {
         ),
       ),
     );
+  }
+
+  static void succesfulToast() {
+    Fluttertoast.showToast(
+        msg: RegisterViewModel.feedback,
+        gravity: ToastGravity.CENTER,
+        fontSize: 25,
+        backgroundColor: Colors.greenAccent,
+        timeInSecForIosWeb: 30000);
+  }
+
+  static void errorToast() {
+    Fluttertoast.showToast(
+        msg: RegisterViewModel.feedback,
+        gravity: ToastGravity.CENTER,
+        fontSize: 25,
+        backgroundColor: Colors.redAccent,
+        timeInSecForIosWeb: 30000);
   }
 }

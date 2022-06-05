@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pharmamed/screens/login/login_Screen.dart';
+import 'package:pharmamed/screens/view_All_Medicine_list/view_all_medicineList_screen.dart';
 
 class SellerLandingPage extends StatefulWidget {
   const SellerLandingPage({Key? key}) : super(key: key);
@@ -19,13 +20,25 @@ class _SellerLandingPageState extends State<SellerLandingPage> {
         title: Text("Seller Home Page"),
       ),
       body: Center(
-        child: ElevatedButton(
-            onPressed: () {
-              FirebaseAuth.instance.signOut();
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Login()));
-            },
-            child: Text("Sign Out")),
+        child: Column(
+          children: [
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AllMedicineListView()));
+                },
+                child: Text("All Available Medicine List")),
+            ElevatedButton(
+                onPressed: () {
+                  FirebaseAuth.instance.signOut();
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Login()));
+                },
+                child: Text("Sign Out")),
+          ],
+        ),
       ),
     );
   }
