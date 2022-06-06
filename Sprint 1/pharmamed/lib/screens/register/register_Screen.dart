@@ -20,10 +20,6 @@ class RegisterPage extends StatelessWidget {
       ),
       viewModelBuilder: () => RegisterViewModel(),
     );
-    //return Scaffold(
-    //body: const Body(),
-    //backgroundColor: HexColor('#EBF7FF'),
-    //);
   }
 }
 

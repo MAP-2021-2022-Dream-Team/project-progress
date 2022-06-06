@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/gestures.dart';
@@ -9,9 +11,6 @@ import 'package:stacked/stacked.dart';
 import 'add_medicineViewModel.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:firebase_database/firebase_database.dart';
-import 'package:path/path.dart' as p;
 
 class AddMedicinePage extends StatefulWidget {
   const AddMedicinePage({Key? key}) : super(key: key);
@@ -59,18 +58,18 @@ class AddMedBody {
           children: [
             header(),
             txt(),
-            descText(),
-            descInput(),
-            genericText(),
-            genericInput(),
             nameText(),
             nameInput(),
+            genericText(),
+            genericInput(),
             priceText(),
             priceInput(),
+            descText(),
+            descInput(),
             qttText(),
             qttInput(),
             imgText(),
-            imgInput(),
+            imgInput(model),
             addButton(context, model)
           ],
         ),
@@ -279,30 +278,14 @@ class AddMedBody {
     );
   }
 
-  static Widget imgInput() {
+  static Widget imgInput(AddMedViewModel model) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Align(
         alignment: Alignment.centerLeft,
         child: ElevatedButton(
-          onPressed: () async {
-            final results = await FilePicker.platform.pickFiles(
-              allowMultiple: false,
-              type: FileType.custom,
-              allowedExtensions: ['png', 'jpg'],
-            );
-            if (results == null) {
-              const ScaffoldMessenger(
-                child: SnackBar(
-                  content: Text('No file selected.'),
-                ),
-              );
-            }
-            final path = results?.files.single.path!;
-            final fileName = results?.files.single.name;
-
-            print(path);
-            print(fileName);
+          onPressed: () {
+            model.saveImg();
           },
           child: const Text('Upload Image'),
         ),
@@ -344,33 +327,3 @@ class AddMedBody {
         timeInSecForIosWeb: 30000);
   }
 }
-
-//class UploadImage extends StatefulWidget {
-  //const UploadImage({Key? key}) : super(key: key);
-
-  //@override
-  //State<UploadImage> createState() => _UploadImageState();
-//}
-
-//class _UploadImageState extends State<UploadImage> {
-  //final postRef = FirebaseDatabase.instance.ref().child('medicines');
-  //firebase_storage.FirebaseStorage storage =
-      //firebase_storage.FirebaseStorage.instance;
-  //late File _imageFile;
-  //final picker = ImagePicker();
-
-  //Future pickImage() async {
-    //final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-
-    //setState(
-      //() {
-        //_imageFile = File(pickedFile.path);
-      //},
-    //);
-  //}
-
-  //@override
-  //Widget build(BuildContext context) {
-    //return Container();
-  //}
-//}

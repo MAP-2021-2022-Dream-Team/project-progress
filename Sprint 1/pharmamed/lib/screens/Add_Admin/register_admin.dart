@@ -19,14 +19,11 @@ class AddAdmins {
           .then((value) async {
         User admin = FirebaseAuth.instance.currentUser!;
 
-        await FirebaseFirestore.instance
-            .collection("admin")
-            .doc(admin.uid)
-            .set({
+        await FirebaseFirestore.instance.collection("user").doc(admin.uid).set({
           "fname": AddAdmin.nameController.text.trim(),
           "uname": AddAdmin.usernameController.text.trim(),
           "phone": AddAdmin.phoneNumController.text.trim(),
-          "role": "buyer",
+          "role": "seller",
         });
       });
 

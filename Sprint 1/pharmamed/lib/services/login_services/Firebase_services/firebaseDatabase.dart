@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pharmamed/models/medicines.dart';
 import 'package:pharmamed/screens/add_medicine/add_medicineViewModel.dart';
 import 'package:pharmamed/screens/view_All_Medicine_list/view_All_medicineList_viewModel.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 @lazySingleton
 class FireBaseDatabaseServices {
@@ -17,14 +21,32 @@ class FireBaseDatabaseServices {
   }
 
   static Future addMedicines() async {
-    FirebaseFirestore.instance.collection('medicines').add(
-      {
-        'description': AddMedViewModel.descController.text.trim(),
-        'generic': AddMedViewModel.genController.text.trim(),
-        'name': AddMedViewModel.nameController.text.trim(),
-        'price': AddMedViewModel.priceController.text.trim(),
-        'quantity': AddMedViewModel.qttController.text.trim(),
-      },
-    );
+    final firebase_storage.FirebaseStorage storage =
+        firebase_storage.FirebaseStorage.instance;
+
+    File file = File(AddMedViewModel.path);
+    var newUrl;
+    String name = AddMedViewModel.fileName;
+
+    try {
+      firebase_storage.Reference ref = storage.ref('images/($name)');
+      UploadTask uploadTask = ref.putFile(file);
+      await Future.value(uploadTask);
+      newUrl = await ref.getDownloadURL();
+
+      FirebaseFirestore.instance.collection('medicines').add(
+        {
+          'name': AddMedViewModel.nameController.text.trim(),
+          'generic': AddMedViewModel.genController.text.trim(),
+          'price': AddMedViewModel.priceController.text.trim(),
+          'description': AddMedViewModel.descController.text.trim(),
+          'quantity': AddMedViewModel.qttController.text.trim(),
+          'image': newUrl.toString(),
+        },
+      );
+      AddMedViewModel.feedback = "Medicine Added";
+    } on FirebaseException catch (e) {
+      AddMedViewModel.feedback = e.toString();
+    }
   }
 }

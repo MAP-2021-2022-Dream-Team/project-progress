@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:pharmamed/screens/Add_Admin/admin_home.dart';
 import 'package:pharmamed/screens/login/login_Screen.dart';
 import 'package:pharmamed/screens/view_All_Medicine_list/view_all_medicineList_screen.dart';
 
@@ -24,6 +25,17 @@ class _SellerLandingPageState extends State<SellerLandingPage> {
       body: Center(
         child: Column(
           children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AdminHome(),
+                  ),
+                );
+              },
+              child: const Text("Add Admin"),
+            ),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(

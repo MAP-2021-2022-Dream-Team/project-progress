@@ -43,36 +43,3 @@ class LoginViewModel extends BaseViewModel {
     }
   }
 }
-
-// class LoginViewModel {
-//   static final emailController = TextEditingController();
-//   static final passwordController = TextEditingController();
-
-//   static void login(BuildContext context) async {
-//     await LoginService.signIn();
-//     // roleDetector(context);
-//     // await FirebaseAuth.instance.authStateChanges();
-//     const MyApp();
-//   }
-
-//   static void roleDetector(BuildContext context) async {
-//     final String user = FirebaseAuth.instance.currentUser!.uid;
-//     final doc = await FirebaseFirestore.instance.doc('user/$user').get();
-//     final users = Users.fromJson(doc.data()!);
-
-//     if (users.role == "buyer") {
-//       Navigator.push(
-//           context,
-//           MaterialPageRoute(
-//             builder: (context) => const BuyerLandingPage(),
-//           ));
-//       // Routers.route(Routers.buyerLandingPath, context);
-//     } else if (users.role == "seller") {
-//       Navigator.push(
-//           context,
-//           MaterialPageRoute(
-//             builder: (context) => const SellerLandingPage(),
-//           ));
-//     }
-//   }
-// }

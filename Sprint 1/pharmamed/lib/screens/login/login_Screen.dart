@@ -22,30 +22,3 @@ class Login extends StatelessWidget {
     );
   }
 }
-
-// class Login extends StatefulWidget {
-//   const Login({Key? key}) : super(key: key);
-
-//   @override
-//   State<Login> createState() => _LoginState();
-// }
-
-// class _LoginState extends State<Login> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: HexColor('#EBF7FF'),
-//       body: Column(
-//         mainAxisAlignment: MainAxisAlignment.center,
-//         children: [
-//           LoginBody.headerTxt(),
-//           LoginBody.instructionTxt(),
-//           LoginBody.txtField(),
-//           LoginBody.forgotPassText(context),
-//           LoginBody.button(context),
-//           LoginBody.signupText(),
-//         ],
-//       ),
-//     );
-//   }
-// }
