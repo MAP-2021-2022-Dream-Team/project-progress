@@ -26,13 +26,14 @@ class MyApp extends StatelessWidget {
       title: "Main Page",
       color: HexColor("#70BFFF"),
       home: StreamBuilder<User?>(
-          stream: FirebaseAuth.instance.authStateChanges(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              LoginViewModel.roleDetector(context);
-            }
-            return const Login();
-          }),
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            LoginViewModel.roleDetector(context);
+          }
+          return const Login();
+        },
+      ),
     );
   }
 }

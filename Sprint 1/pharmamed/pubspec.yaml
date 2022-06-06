@@ -30,6 +30,10 @@ dependencies:
   flutter:
     sdk: flutter
 
+  firebase_storage: ^10.2.17
+  firebase_analytics: ^9.1.9
+  firebase_database: ^9.0.15
+  intl: ^0.17.0
   firebase_core: ^1.16.0
   firebase_auth: ^3.3.17
   cloud_firestore: ^3.1.14
@@ -42,7 +46,8 @@ dependencies:
   get_it:
   injectable:
 
-
+  image_picker: ^0.8.5+3
+  file_picker: ^4.6.1
 
   cupertino_icons: ^1.0.2
   flutter_svg: 
