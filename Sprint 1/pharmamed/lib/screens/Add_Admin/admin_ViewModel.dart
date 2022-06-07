@@ -1,10 +1,9 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:pharmamed/app/locator.dart';
 import 'package:pharmamed/main.dart';
-import 'package:pharmamed/screens/Add_Admin/register_admin.dart';
+import 'package:pharmamed/services/login_services/add_admin_services/register_admin.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
 
 class AddAdmin extends BaseViewModel {
   static final nameController = TextEditingController();

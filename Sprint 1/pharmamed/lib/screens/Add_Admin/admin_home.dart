@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pharmamed/screens/Add_Admin/register_admin.dart';
 import 'package:pharmamed/screens/Add_Admin/adding_admin_screen.dart';
 import 'package:pharmamed/screens/Add_Admin/admin_ViewModel.dart';
 import 'package:pharmamed/screens/Add_Admin/CustomButton.dart';

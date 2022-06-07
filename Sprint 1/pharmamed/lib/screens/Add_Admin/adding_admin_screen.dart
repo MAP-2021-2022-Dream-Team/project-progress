@@ -50,7 +50,7 @@ class AdminBody {
             pswText(),
             pswInput(),
             regButton(context, model),
-            accCheck(context),
+            // accCheck(context),
           ],
         ),
       ),
@@ -262,32 +262,32 @@ class AdminBody {
     );
   }
 
-  static Widget accCheck(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 25),
-      child: RichText(
-        text: TextSpan(
-          children: [
-            const TextSpan(
-              text: 'Already have an account?',
-              style: TextStyle(color: Colors.black),
-            ),
-            TextSpan(
-              text: ' Sign In',
-              style: const TextStyle(
-                  color: Colors.blueGrey, fontWeight: FontWeight.bold),
-              recognizer: TapGestureRecognizer()
-                ..onTap = () async {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => const Login(),
-                    ),
-                  );
-                },
-            )
-          ],
-        ),
-      ),
-    );
-  }
+  // static Widget accCheck(BuildContext context) {
+  //   return Padding(
+  //     padding: const EdgeInsets.only(top: 25),
+  //     child: RichText(
+  //       text: TextSpan(
+  //         children: [
+  //           const TextSpan(
+  //             text: 'Already have an account?',
+  //             style: TextStyle(color: Colors.black),
+  //           ),
+  //           TextSpan(
+  //             text: ' Sign In',
+  //             style: const TextStyle(
+  //                 color: Colors.blueGrey, fontWeight: FontWeight.bold),
+  //             recognizer: TapGestureRecognizer()
+  //               ..onTap = () async {
+  //                 Navigator.of(context).push(
+  //                   MaterialPageRoute(
+  //                     builder: (BuildContext context) => const Login(),
+  //                   ),
+  //                 );
+  //               },
+  //           )
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 }
