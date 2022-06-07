@@ -5,7 +5,7 @@ import 'package:pharmamed/screens/Add_Admin/adding_admin_screen.dart';
 import 'package:pharmamed/screens/Add_Admin/admin_home.dart';
 import 'package:pharmamed/screens/login/login_Screen.dart';
 import 'package:pharmamed/screens/view_All_Medicine_list/view_all_medicineList_screen.dart';
-
+import 'package:pharmamed/screens/seller_profile/seller_profile.dart';
 import '../add_medicine/add_medicine.dart';
 
 class SellerLandingPage extends StatefulWidget {
@@ -22,6 +22,31 @@ class _SellerLandingPageState extends State<SellerLandingPage> {
       backgroundColor: HexColor('#EBF7FF'),
       appBar: AppBar(
         title: const Text("Seller Home Page"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SellerProfile(),
+                ),
+              );
+            },
+            icon: const Icon(Icons.account_circle),
+          ),
+          IconButton(
+            onPressed: () {
+              FirebaseAuth.instance.signOut();
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const Login(),
+                ),
+              );
+            },
+            icon: const Icon(Icons.logout),
+          ),
+        ],
       ),
       body: Center(
         child: Column(
@@ -60,18 +85,18 @@ class _SellerLandingPageState extends State<SellerLandingPage> {
               icon: const Icon(Icons.add_box),
               label: const Text('Add New Medicine'),
             ),
-            ElevatedButton(
-              onPressed: () {
-                FirebaseAuth.instance.signOut();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const Login(),
-                  ),
-                );
-              },
-              child: const Text("Sign Out"),
-            ),
+            //ElevatedButton(
+            //onPressed: () {
+            //FirebaseAuth.instance.signOut();
+            //Navigator.push(
+            //context,
+            //MaterialPageRoute(
+            //builder: (context) => const Login(),
+            //),
+            //);
+            //},
+            //child: const Text("Sign Out"),
+            //),
           ],
         ),
       ),

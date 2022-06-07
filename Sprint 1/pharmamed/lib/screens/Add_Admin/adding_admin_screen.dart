@@ -15,6 +15,9 @@ class Adding extends StatelessWidget {
     return ViewModelBuilder<AddAdmin>.reactive(
       builder: (context, model, child) => Scaffold(
         body: AdminBody.body(context, model),
+        appBar: AppBar(
+          title: const Text('Add New Admin'),
+        ),
         backgroundColor: HexColor('#EBF7FF'),
       ),
       viewModelBuilder: () => AddAdmin(),
@@ -63,7 +66,7 @@ class AdminBody {
       child: Align(
         alignment: Alignment.center,
         child: Text(
-          'SIGN UP',
+          'New Admin',
           style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
         ),
       ),
@@ -76,7 +79,7 @@ class AdminBody {
       child: Align(
         alignment: Alignment.center,
         child: Text(
-          'Fill up the following details to register.',
+          'Fill up the following details to add new admin.',
           style: TextStyle(fontSize: 14),
         ),
       ),
@@ -257,7 +260,7 @@ class AdminBody {
         },
         style: ElevatedButton.styleFrom(
             onPrimary: Colors.white, primary: HexColor('#0D5F96')),
-        child: const Text('SIGN UP'),
+        child: const Text('ADD ADMIN'),
       ),
     );
   }

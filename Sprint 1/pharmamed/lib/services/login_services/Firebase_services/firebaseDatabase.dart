@@ -7,6 +7,7 @@ import 'package:pharmamed/models/medicines.dart';
 import 'package:pharmamed/screens/add_medicine/add_medicineViewModel.dart';
 import 'package:pharmamed/screens/view_All_Medicine_list/view_All_medicineList_viewModel.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:pharmamed/screens/seller_profile/seller_profileViewModel.dart';
 
 @lazySingleton
 class FireBaseDatabaseServices {
@@ -48,5 +49,16 @@ class FireBaseDatabaseServices {
     } on FirebaseException catch (e) {
       AddMedViewModel.feedback = e.toString();
     }
+  }
+
+  static Future getProfileDetails() async {
+    FirebaseFirestore.instance.collection('user').add(
+      {
+        //'uname': getProfileDetails.unameController.text.trim(),
+        //'fname': getProfileDetails.fnameController.text.trim(),
+        //'email': getProfileDetails.emailController.text.trim(),
+        //'phone': getProfileDetails.phoneController.text.trim();
+      },
+    );
   }
 }
