@@ -1,3 +1,3 @@
 # Flutter APK Google Drive Link
-https://drive.google.com/drive/u/0/folders/1MubWCklxdNIIbkp-e_aNPV9XFfP9zOV_
-https://drive.google.com/drive/u/0/folders/1MubWCklxdNIIbkp-e_aNPV9XFfP9zOV_
+
+[Link.txt](https://github.com/MAP-2021-2022-Dream-Team/project-progress/files/8868571/Link.txt)
