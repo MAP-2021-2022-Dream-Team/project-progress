@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pharmamed/screens/Add_Admin/adding_admin_screen.dart';
-import 'package:pharmamed/screens/Add_Admin/admin_home.dart';
 import 'package:pharmamed/screens/login/login_Screen.dart';
 import 'package:pharmamed/screens/view_All_Medicine_list/view_all_medicineList_screen.dart';
 import 'package:pharmamed/screens/seller_profile/seller_profile.dart';
