@@ -5,7 +5,7 @@ import 'package:pharmamed/screens/login/login_viewModel.dart';
 
 @lazySingleton
 class LoginService {
-  static Future signIn() async {
+  Future signIn() async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: LoginViewModel.emailController.text.trim(),

@@ -2,6 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pharmamed/app/locator.dart';
 import 'package:pharmamed/main.dart';
 import 'package:pharmamed/models/users.dart';
 import 'package:pharmamed/screens/buyer_landing_page/buyer_landing_screen.dart';
@@ -15,8 +16,11 @@ class LoginViewModel extends BaseViewModel {
   static final emailController = TextEditingController();
   static final passwordController = TextEditingController();
 
+  LoginService loginService = locator<LoginService>();
+
   void login(BuildContext context) async {
-    await LoginService.signIn();
+    // await LoginService.signIn();
+    await loginService.signIn();
     // roleDetector(context);
     // await FirebaseAuth.instance.authStateChanges();
 

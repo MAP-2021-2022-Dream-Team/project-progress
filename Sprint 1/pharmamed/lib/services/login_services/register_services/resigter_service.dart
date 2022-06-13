@@ -1,16 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:injectable/injectable.dart';
-import 'package:pharmamed/app/locator.dart';
 import 'package:pharmamed/screens/register/register_viewModel.dart';
-import 'package:stacked_services/stacked_services.dart';
 
 @lazySingleton
 class RegisterService {
-  static Future signUp() async {
+  Future signUp(String feedback) async {
     try {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
@@ -27,9 +22,9 @@ class RegisterService {
         });
       });
 
-      RegisterViewModel.feedback = "Successful SignUp";
+      feedback = "Successful SignUp";
     } on FirebaseAuthException catch (e) {
-      RegisterViewModel.feedback = e.toString();
+      feedback = e.toString();
     }
   }
 }

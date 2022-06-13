@@ -309,18 +309,18 @@ class AddMedBody {
     );
   }
 
-  static void succesfulToast() {
+  static void succesfulToast(String feedback) {
     Fluttertoast.showToast(
-        msg: AddMedViewModel.feedback,
+        msg: feedback,
         gravity: ToastGravity.CENTER,
         fontSize: 25,
         backgroundColor: Colors.greenAccent,
         timeInSecForIosWeb: 30000);
   }
 
-  static void errorToast() {
+  static void errorToast(String feedback) {
     Fluttertoast.showToast(
-        msg: AddMedViewModel.feedback,
+        msg: feedback,
         gravity: ToastGravity.CENTER,
         fontSize: 25,
         backgroundColor: Colors.redAccent,

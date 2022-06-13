@@ -1,12 +1,11 @@
+// ignore_for_file: file_names
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pharmamed/app/locator.dart';
-import 'package:pharmamed/main.dart';
 import 'package:pharmamed/screens/seller_landing_lage/seller_landing_screen.dart';
-import 'package:pharmamed/services/login_services/Firebase_services/firebaseDatabase.dart';
+import 'package:pharmamed/services/login_services/Database_services/databaseService.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
 import 'add_medicine.dart';
 
 class AddMedViewModel extends BaseViewModel {
@@ -15,18 +14,20 @@ class AddMedViewModel extends BaseViewModel {
   static final nameController = TextEditingController();
   static final priceController = TextEditingController();
   static final qttController = TextEditingController();
-  static String feedback = "";
-  static dynamic path;
-  static dynamic fileName;
+  dynamic feedback = "";
+  dynamic path;
+  dynamic fileName;
+  DatabaseServices databaseServices = locator<DatabaseServices>();
 
   void addMed(BuildContext context) {
-    FireBaseDatabaseServices.addMedicines();
+    // DatabaseServices.addMedicines();
+    feedback = databaseServices.addMedicines(feedback, path, fileName);
 
-    if (feedback == "Medicine Added") {
-      AddMedBody.succesfulToast();
-    } else {
-      AddMedBody.errorToast();
-    }
+    // if (feedback == "Medicine Added") {
+    //   AddMedBody.succesfulToast(feedback);
+    // } else {
+    //   AddMedBody.errorToast(feedback);
+    // }
 
     Navigator.push(
       context,

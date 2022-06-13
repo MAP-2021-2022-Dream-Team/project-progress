@@ -6,8 +6,8 @@ import 'package:injectable/injectable.dart';
 import 'package:pharmamed/screens/Add_Admin/admin_ViewModel.dart';
 
 @lazySingleton
-class AddAdmins {
-  static Future add() async {
+class AddAdminService {
+  Future addBuyer() async {
     try {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(

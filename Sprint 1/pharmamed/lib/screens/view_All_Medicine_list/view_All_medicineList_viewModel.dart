@@ -1,18 +1,19 @@
 // ignore_for_file: file_names
 
+import 'package:pharmamed/app/locator.dart';
 import 'package:pharmamed/models/medicines.dart';
-import 'package:pharmamed/services/login_services/Firebase_services/firebaseDatabase.dart';
+import 'package:pharmamed/services/login_services/Database_services/databaseService.dart';
 import 'package:stacked/stacked.dart';
 
 class AllMedicineListViewModel extends BaseViewModel {
-  static List<Medicine> medicineList = [];
+  List<Medicine> medicineList = [];
+  DatabaseServices databaseServices = locator<DatabaseServices>();
 
   AllMedicineListViewModel() {
     getAllMedicines();
   }
 
   List<Medicine> getAllMedicineList() {
-    // FireBaseDatabaseServices.getAllMedicines();
     return medicineList;
   }
 
@@ -21,7 +22,8 @@ class AllMedicineListViewModel extends BaseViewModel {
   }
 
   Future getAllMedicines() async {
-    await FireBaseDatabaseServices.getAllMedicines();
+    // await DatabaseServices.getAllMedicines();
+    medicineList = await databaseServices.getAllMedicines(medicineList);
     notifyListeners();
   }
 }

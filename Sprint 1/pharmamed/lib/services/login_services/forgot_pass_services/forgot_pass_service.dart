@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:injectable/injectable.dart';
 import 'package:pharmamed/screens/reset_password_page/forgot_pass_viewmodel.dart';
 
-abstract class ForgotPassService {
-  static Future resetPass() async {
+@lazySingleton
+class ForgotPassService {
+  Future resetPass() async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(
           email: ForgotPassViewModel.resetPassEmailController.text.trim());

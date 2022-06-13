@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -5,29 +7,27 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pharmamed/models/medicines.dart';
 import 'package:pharmamed/screens/add_medicine/add_medicineViewModel.dart';
-import 'package:pharmamed/screens/view_All_Medicine_list/view_All_medicineList_viewModel.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:pharmamed/screens/seller_profile/seller_profileViewModel.dart';
 
 @lazySingleton
-class FireBaseDatabaseServices {
-  static Future getAllMedicines() async {
+class DatabaseServices {
+  Future getAllMedicines(List<Medicine> medicineList) async {
     var data = await FirebaseFirestore.instance
         .collection("medicines")
         .orderBy("name", descending: false)
         .get();
 
-    AllMedicineListViewModel.medicineList =
-        List.from(data.docs.map((e) => Medicine.fromJson(e.data())));
+    medicineList = List.from(data.docs.map((e) => Medicine.fromJson(e.data())));
+    return medicineList;
   }
 
-  static Future addMedicines() async {
+  Future addMedicines(String feedback, String path, String fileName) async {
     final firebase_storage.FirebaseStorage storage =
         firebase_storage.FirebaseStorage.instance;
 
-    File file = File(AddMedViewModel.path);
+    File file = File(path);
     var newUrl;
-    String name = AddMedViewModel.fileName;
+    String name = fileName;
 
     try {
       firebase_storage.Reference ref = storage.ref('images/($name)');
@@ -45,9 +45,11 @@ class FireBaseDatabaseServices {
           'image': newUrl.toString(),
         },
       );
-      AddMedViewModel.feedback = "Medicine Added";
+      feedback = "Medicine Added";
+      return feedback;
     } on FirebaseException catch (e) {
-      AddMedViewModel.feedback = e.toString();
+      feedback = e.toString();
+      return feedback;
     }
   }
 
