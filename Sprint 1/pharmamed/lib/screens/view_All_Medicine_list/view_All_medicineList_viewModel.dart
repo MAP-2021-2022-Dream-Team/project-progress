@@ -26,4 +26,12 @@ class AllMedicineListViewModel extends BaseViewModel {
     medicineList = await databaseServices.getAllMedicines(medicineList);
     notifyListeners();
   }
+
+  Future deleteMedicine(int index) async {
+    String docId = medicineList.elementAt(index).id;
+
+    await databaseServices.deleteMedicine(docId);
+
+    getAllMedicines();
+  }
 }

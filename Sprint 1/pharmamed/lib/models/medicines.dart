@@ -7,7 +7,7 @@ class Medicine {
   dynamic _description;
   dynamic _image;
 
-  dynamic get id => id;
+  dynamic get id => _id;
 
   set id(dynamic id) {
     _id = id;
@@ -58,7 +58,8 @@ class Medicine {
         _price = json['price'],
         _quantity = json['quantity'],
         _description = json['description'],
-        _image = json['image'];
+        _image = json['image'],
+        _id = json['id'];
 
   Map<String, dynamic> toJson() => {
         'name': name,
@@ -67,5 +68,6 @@ class Medicine {
         'quantity': quantity,
         'description': description,
         'image': image,
+        'id': id,
       };
 }

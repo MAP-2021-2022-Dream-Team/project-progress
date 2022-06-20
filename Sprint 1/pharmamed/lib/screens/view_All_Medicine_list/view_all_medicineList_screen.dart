@@ -54,7 +54,7 @@ class _AllMedicineListViewState extends State<AllMedicineListView> {
                               width: MediaQuery.of(context).size.width * 0.30,
                               margin: const EdgeInsets.all(10),
                               child: Image.network(
-                                model.getAllMedicineList()[index].image,
+                                model.medicineList[index].image,
                                 height:
                                     MediaQuery.of(context).size.height * 0.125,
                                 width: MediaQuery.of(context).size.width * 0.30,
@@ -64,12 +64,13 @@ class _AllMedicineListViewState extends State<AllMedicineListView> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Text(
-                                  model.getAllMedicineList()[index].name,
+                                  model.medicineList[index].name,
+                                  // model.getAllMedicineList()[index].name,
                                   style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16),
                                 ),
-                                Text(model.getAllMedicineList()[index].generic),
+                                Text(model.medicineList[index].generic),
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -78,9 +79,7 @@ class _AllMedicineListViewState extends State<AllMedicineListView> {
                                       padding: const EdgeInsets.only(right: 3),
                                       child: Text(
                                         "Pri: " +
-                                            model
-                                                .getAllMedicineList()[index]
-                                                .price,
+                                            model.medicineList[index].price,
                                         style: const TextStyle(fontSize: 12),
                                       ),
                                     ),
@@ -88,9 +87,7 @@ class _AllMedicineListViewState extends State<AllMedicineListView> {
                                       padding: const EdgeInsets.only(left: 3),
                                       child: Text(
                                         "Qty: " +
-                                            model
-                                                .getAllMedicineList()[index]
-                                                .quantity,
+                                            model.medicineList[index].quantity,
                                         style: const TextStyle(fontSize: 12),
                                       ),
                                     )
@@ -118,7 +115,10 @@ class _AllMedicineListViewState extends State<AllMedicineListView> {
                                       minimumSize: const Size(30, 30),
                                       primary: const Color.fromARGB(
                                           185, 250, 50, 50)),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    model.deleteMedicine(index);
+                                    // model.printAnything(index);
+                                  },
                                   child: const Icon(
                                     Icons.delete,
                                     size: 15,
