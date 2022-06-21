@@ -104,7 +104,9 @@ class _AllMedicineListViewState extends State<AllMedicineListView> {
                                         minimumSize: const Size(30, 30),
                                         primary: const Color.fromARGB(
                                             178, 248, 248, 14)),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      model.editMedicine(index, context);
+                                    },
                                     child: const Icon(
                                       Icons.edit,
                                       size: 15,

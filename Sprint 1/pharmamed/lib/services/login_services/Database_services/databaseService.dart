@@ -11,6 +11,9 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 @lazySingleton
 class DatabaseServices {
+  final firebase_storage.FirebaseStorage storage =
+      firebase_storage.FirebaseStorage.instance;
+
   Future getAllMedicines(List<Medicine> medicineList) async {
     var data = await FirebaseFirestore.instance
         .collection("medicines")
@@ -22,9 +25,6 @@ class DatabaseServices {
   }
 
   Future addMedicines(String feedback, String path, String fileName) async {
-    final firebase_storage.FirebaseStorage storage =
-        firebase_storage.FirebaseStorage.instance;
-
     File file = File(path);
     var newUrl;
     String name = fileName;
@@ -48,8 +48,7 @@ class DatabaseServices {
 
       String id = docId;
 
-      firebase_storage.Reference ref =
-          storage.ref('images/medicine/$id/($name)');
+      firebase_storage.Reference ref = storage.ref('images/medicine/$id');
       UploadTask uploadTask = ref.putFile(file);
       await Future.value(uploadTask);
       newUrl = await ref.getDownloadURL();
@@ -72,6 +71,42 @@ class DatabaseServices {
         .collection('medicines')
         .doc(docId)
         .delete();
+
+    firebase_storage.Reference ref = storage.ref('images/medicine/$docId');
+    ref.delete();
+  }
+
+  Future editMedicine(String path, String name, String generic, String price,
+      String quantity, String description, String docId) async {
+    var doc = FirebaseFirestore.instance.collection('medicines').doc(docId);
+
+    if (name.isNotEmpty) {
+      doc.update({'name': name});
+    }
+    if (generic.isNotEmpty) {
+      doc.update({'generic': generic});
+    }
+    if (price.isNotEmpty) {
+      doc.update({'price': price});
+    }
+    if (quantity.isNotEmpty) {
+      doc.update({'quantity': quantity});
+    }
+    if (description.isNotEmpty) {
+      doc.update({'description': description});
+    }
+    if (path != "") {
+      File file = File(path);
+      var newUrl;
+      firebase_storage.Reference ref = storage.ref('images/medicine/$docId');
+      UploadTask uploadTask = ref.putFile(file);
+      await Future.value(uploadTask);
+      newUrl = await ref.getDownloadURL();
+
+      doc.update({
+        'image': newUrl.toString(),
+      });
+    }
   }
 
   static Future getProfileDetails() async {}
