@@ -8,6 +8,7 @@ import 'package:injectable/injectable.dart';
 import 'package:pharmamed/models/medicines.dart';
 import 'package:pharmamed/screens/add_medicine/add_medicineViewModel.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:pharmamed/screens/med_buyer/med_buyerViewModel.dart';
 
 @lazySingleton
 class DatabaseServices {
@@ -107,6 +108,30 @@ class DatabaseServices {
         'image': newUrl.toString(),
       });
     }
+  }
+
+  static Future getMedicines() async {
+    var data = await FirebaseFirestore.instance
+        .collection("medicines")
+        .orderBy("name", descending: false)
+        .get();
+
+    MedicineBuyerViewModel.medicineList = List.from(
+      data.docs.map(
+        (e) => Medicine.fromJson(
+          e.data(),
+        ),
+      ),
+    );
+  }
+
+  static Future getMedDesc() async {
+    //var data =  await FirebaseFirestore.instance.collection('medicines').get
+    FirebaseFirestore.instance.collection('medicines').get();
+  }
+
+  static int getData(int index) {
+    return index;
   }
 
   static Future getProfileDetails() async {}

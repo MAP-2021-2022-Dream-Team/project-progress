@@ -4,6 +4,8 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:pharmamed/screens/login/login_Screen.dart';
 import 'package:pharmamed/screens/search_medicine/search_medicine.dart';
 
+import '../med_buyer/med_buyer.dart';
+
 class BuyerLandingPage extends StatefulWidget {
   const BuyerLandingPage({Key? key}) : super(key: key);
 
@@ -23,23 +25,40 @@ class _BuyerLandingPageState extends State<BuyerLandingPage> {
         children: [
           Center(
             child: ElevatedButton(
-                onPressed: () {
-                  FirebaseAuth.instance.signOut();
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Login()));
-                },
-                child: const Text("Sign Out")),
-          ),
-          ElevatedButton(
               onPressed: () {
+                FirebaseAuth.instance.signOut();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const SearchMed(),
+                    builder: (context) => const Login(),
                   ),
                 );
               },
-              child: Text("Search Medicine"))
+              child: const Text("Sign Out"),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const SearchMed(),
+                ),
+              );
+            },
+            child: const Text("Search Medicine"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MedicineList(),
+                ),
+              );
+            },
+            child: const Text('View Medicine'),
+          ),
         ],
       ),
     );
