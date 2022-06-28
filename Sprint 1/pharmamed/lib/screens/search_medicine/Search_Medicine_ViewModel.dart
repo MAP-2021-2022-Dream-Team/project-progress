@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:pharmamed/app/locator.dart';
 import 'package:pharmamed/models/medicines.dart';
 import 'package:pharmamed/services/login_services/Database_services/databaseService.dart';
@@ -11,25 +13,26 @@ class SearchMedViewModel extends BaseViewModel {
     getAllMedicines();
   }
 
-  List<Medicine> getAllMedicineList() {
-    return medicineList;
-  }
-
-  int getMedicineListLength() {
-    return medicineList.length;
-  }
-
   Future getAllMedicines() async {
     // await DatabaseServices.getAllMedicines();
     medicineList = await databaseServices.getAllMedicines(medicineList);
     notifyListeners();
   }
 
-  Future deleteMedicine(int index) async {
-    String docId = medicineList.elementAt(index).id;
+  searchMedicine(String value) {
+    if (value.isNotEmpty) {
+      final suggestions = medicineList.where((element) {
+        String medName = element.name;
+        medName = medName.toLowerCase();
+        String input = value.toLowerCase();
 
-    await databaseServices.deleteMedicine(docId);
+        return medName.contains(input);
+      }).toList();
+      medicineList = suggestions;
+    } else {
+      getAllMedicines();
+    }
 
-    getAllMedicines();
+    notifyListeners();
   }
 }

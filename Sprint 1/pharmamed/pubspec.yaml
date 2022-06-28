@@ -46,7 +46,6 @@ dependencies:
   get_it:
   injectable:
 
-  image_picker: ^0.8.5+3
   file_picker: ^4.6.1
 
   cupertino_icons: ^1.0.2

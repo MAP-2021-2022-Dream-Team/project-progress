@@ -42,7 +42,7 @@ class _BuyerLandingPageState extends State<BuyerLandingPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const SearchMed(),
+                  builder: (context) => const SearchMedView(),
                 ),
               );
             },

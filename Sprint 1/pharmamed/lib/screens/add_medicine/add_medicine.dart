@@ -9,7 +9,6 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:pharmamed/screens/add_medicine/add_medicineViewModel.dart';
 import 'package:stacked/stacked.dart';
 import 'add_medicineViewModel.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:file_picker/file_picker.dart';
 
 class AddMedicinePage extends StatefulWidget {
