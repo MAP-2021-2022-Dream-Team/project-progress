@@ -1,7 +1,9 @@
 // ignore_for_file: file_names
 
+import 'package:flutter/material.dart';
 import 'package:pharmamed/app/locator.dart';
 import 'package:pharmamed/models/medicines.dart';
+import 'package:pharmamed/screens/med_description/med_desc.dart';
 import 'package:pharmamed/services/login_services/Database_services/databaseService.dart';
 import 'package:stacked/stacked.dart';
 
@@ -34,5 +36,16 @@ class SearchMedViewModel extends BaseViewModel {
     }
 
     notifyListeners();
+  }
+
+  medicineDescription(int index, BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MedicineDesc(
+          index: index,
+        ),
+      ),
+    );
   }
 }

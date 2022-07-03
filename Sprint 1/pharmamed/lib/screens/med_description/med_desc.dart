@@ -5,7 +5,8 @@ import 'package:stacked/stacked.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class MedicineDesc extends StatefulWidget {
-  MedicineDesc({Key? key}) : super(key: key);
+  int index;
+  MedicineDesc({Key? key, required this.index}) : super(key: key);
 
   @override
   State<MedicineDesc> createState() => _MedicineDescState();
@@ -21,22 +22,8 @@ class _MedicineDescState extends State<MedicineDesc> {
           title: const Text("Medicine Information"),
         ),
         body: MedDescBody.body(context, model),
-        //ListView.builder(
-        //itemCount: model.getMedicineListLength(),
-        //itemBuilder: (context, index) {
-        //return Column(
-        //children: const [
-        //Text(
-        //model.getMedicineList()[index].name,
-        //'Med Desc',
-        //style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-        //),
-        //],
-        //);
-        //}),
-        //viewModelBuilder: () => MedicineDescViewModel(),
       ),
-      viewModelBuilder: () => MedicineDescViewModel(),
+      viewModelBuilder: () => MedicineDescViewModel(widget.index),
     );
   }
 }
@@ -51,74 +38,118 @@ class MedDescBody {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            //medPic(),
-            medName(),
-            medGeneric(),
-            medPrice(),
-            medQe(),
+            medPic(context, model),
+            medName(model),
+            medGeneric(model),
+            medPrice(model),
+            medQe(model),
+            medDesc(model),
+            medAddToCart(context, model),
           ],
         ),
       ),
     );
   }
 
-  static Widget medName() {
-    return const Padding(
-      padding: EdgeInsets.only(top: 200),
+  static Widget medPic(BuildContext context, MedicineDescViewModel model) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 0),
       child: Align(
         alignment: Alignment.center,
-        child: Text(
-          'Med 1',
-          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height * 0.35,
+          width: MediaQuery.of(context).size.width,
+          child: Image.network(
+            model.medicine.image,
+            height: MediaQuery.of(context).size.height * 0.35,
+            width: MediaQuery.of(context).size.width,
+            errorBuilder: (context, object, stackError) {
+              return Text(object.toString());
+            },
+          ),
         ),
       ),
     );
   }
 
-  static Widget medPic() {
+  static Widget medName(MedicineDescViewModel model) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 20),
+      child: Align(
+        alignment: Alignment.center,
+        child: Text(
+          model.medicine.name,
+          style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+  }
+
+  static Widget medGeneric(MedicineDescViewModel model) {
     return Padding(
       padding: const EdgeInsets.only(top: 10),
       child: Align(
-        alignment: Alignment.center,
-        child: Image.asset('assets/med1.png'),
-      ),
-    );
-  }
-
-  static Widget medGeneric() {
-    return const Padding(
-      padding: EdgeInsets.only(top: 10),
-      child: Align(
         alignment: Alignment.centerLeft,
         child: Text(
-          '5mg Paracitamol',
-          style: TextStyle(fontSize: 17),
+          "Generic: " + model.medicine.generic,
+          style: const TextStyle(fontSize: 17),
         ),
       ),
     );
   }
 
-  static Widget medPrice() {
-    return const Padding(
-      padding: EdgeInsets.only(top: 10),
+  static Widget medPrice(MedicineDescViewModel model) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10),
       child: Align(
         alignment: Alignment.centerLeft,
         child: Text(
-          'Price: 12',
-          style: TextStyle(fontSize: 17),
+          "Price" + model.medicine.price,
+          style: const TextStyle(fontSize: 17),
         ),
       ),
     );
   }
 
-  static Widget medQe() {
-    return const Padding(
-      padding: EdgeInsets.only(top: 10),
+  static Widget medQe(MedicineDescViewModel model) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10),
       child: Align(
         alignment: Alignment.centerLeft,
         child: Text(
-          'Quantiti Available: 100',
-          style: TextStyle(fontSize: 17),
+          "Quantity Available:" + model.medicine.quantity,
+          style: const TextStyle(fontSize: 17),
+        ),
+      ),
+    );
+  }
+
+  static Widget medDesc(MedicineDescViewModel model) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Text(
+          "Description:" + model.medicine.description,
+          style: const TextStyle(fontSize: 17),
+        ),
+      ),
+    );
+  }
+
+  static Widget medAddToCart(
+      BuildContext context, MedicineDescViewModel model) {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: ElevatedButton(
+          onPressed: () {
+            model.addToCart(context);
+          },
+          style: ElevatedButton.styleFrom(
+              onPrimary: Colors.white, primary: HexColor('#0D5F96')),
+          child: const Text('ADD TO CART'),
         ),
       ),
     );

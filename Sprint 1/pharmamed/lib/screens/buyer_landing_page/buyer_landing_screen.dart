@@ -48,17 +48,6 @@ class _BuyerLandingPageState extends State<BuyerLandingPage> {
             },
             child: const Text("Search Medicine"),
           ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => MedicineList(),
-                ),
-              );
-            },
-            child: const Text('View Medicine'),
-          ),
         ],
       ),
     );

@@ -1,34 +1,35 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:pharmamed/app/locator.dart';
+import 'package:pharmamed/screens/buyer_landing_page/buyer_landing_screen.dart';
 //import 'package:pharmamed/services/login_services/Firebase_services/firebaseDatabase.dart';
 import 'package:pharmamed/services/login_services/Database_services/databaseService.dart';
 import 'package:stacked/stacked.dart';
-import 'package:hexcolor/hexcolor.dart';
 
 import '../../models/medicines.dart';
 
 class MedicineDescViewModel extends BaseViewModel {
-  static List<Medicine> medicineList = [];
-  int index = 0;
+  DatabaseServices databaseServices = locator<DatabaseServices>();
+  Medicine medicine = Medicine("", "", "", "", "", "");
+  int index;
 
-  MedicineDescViewModel() {
-    getMedicines();
+  MedicineDescViewModel(this.index) {
+    getMedicine(index);
   }
 
-  List<Medicine> getMedicineList() {
-    return medicineList;
+  Future getMedicine(int index) async {
+    List<Medicine> medicineList = [];
+    medicineList = await databaseServices.getAllMedicines(medicineList);
+    medicine = medicineList.elementAt(index);
+    notifyListeners();
   }
 
-  int getMedicineListLength() {
-    return medicineList.length;
-  }
-
-  Future getMedicines() async {
-    await DatabaseServices.getMedicines();
-  }
-
-  int getIndex(int index) {
-    DatabaseServices.getData(index);
-    return index;
+  addToCart(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const BuyerLandingPage(),
+      ),
+    );
   }
 }
