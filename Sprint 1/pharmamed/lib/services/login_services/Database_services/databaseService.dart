@@ -3,9 +3,11 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pharmamed/models/medicines.dart';
+import 'package:pharmamed/models/users.dart';
 import 'package:pharmamed/screens/add_medicine/add_medicineViewModel.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
@@ -31,11 +33,6 @@ class DatabaseServices {
     var docId;
 
     try {
-      // firebase_storage.Reference ref = storage.ref('images/($name)');
-      // UploadTask uploadTask = ref.putFile(file);
-      // await Future.value(uploadTask);
-      // newUrl = await ref.getDownloadURL();
-
       await FirebaseFirestore.instance.collection('medicines').add(
         {
           'name': AddMedViewModel.nameController.text.trim(),
@@ -107,6 +104,19 @@ class DatabaseServices {
         'image': newUrl.toString(),
       });
     }
+  }
+
+  Future addMedicineToCart(Medicine medicine) async {
+    final String userId = FirebaseAuth.instance.currentUser!.uid;
+    final doc = await FirebaseFirestore.instance.doc('user/$userId').get();
+    final user = Users.fromJson(doc.data()!);
+    var cartId = user.cartId;
+
+    await FirebaseFirestore.instance
+        .collection('carts')
+        .doc(cartId)
+        .collection('cartMedicine')
+        .add({'medicine': medicine.id});
   }
 
   static Future getMedDesc() async {

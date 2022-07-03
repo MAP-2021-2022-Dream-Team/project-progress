@@ -14,12 +14,25 @@ class RegisterService {
           .then((value) async {
         User user = FirebaseAuth.instance.currentUser!;
 
-        await FirebaseFirestore.instance.collection("user").doc(user.uid).set({
-          "fname": RegisterViewModel.nameController.text.trim(),
-          "uname": RegisterViewModel.usernameController.text.trim(),
-          "phone": RegisterViewModel.phoneNumController.text.trim(),
-          "role": "buyer",
-        });
+        var cartId;
+
+        await Future.value(await FirebaseFirestore.instance
+                .collection('carts')
+                .add({}).then((value) => cartId = value.id))
+            .whenComplete(
+          () async {
+            await FirebaseFirestore.instance
+                .collection("user")
+                .doc(user.uid)
+                .set({
+              "fname": RegisterViewModel.nameController.text.trim(),
+              "uname": RegisterViewModel.usernameController.text.trim(),
+              "phone": RegisterViewModel.phoneNumController.text.trim(),
+              "role": "buyer",
+              "cart": cartId,
+            });
+          },
+        );
       });
 
       feedback = "Successful SignUp";

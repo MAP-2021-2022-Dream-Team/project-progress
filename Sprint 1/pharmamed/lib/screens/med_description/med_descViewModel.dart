@@ -24,7 +24,8 @@ class MedicineDescViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  addToCart(BuildContext context) {
+  addToCart(BuildContext context) async {
+    await databaseServices.addMedicineToCart(medicine);
     Navigator.push(
       context,
       MaterialPageRoute(
