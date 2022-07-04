@@ -157,7 +157,9 @@ class OrderView extends StatelessWidget {
           ),
         ),
         floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {},
+          onPressed: () {
+            model.orderSummary(context);
+          },
           label: const Text("Place Order"),
           backgroundColor: HexColor('#0D5F96'),
         ),

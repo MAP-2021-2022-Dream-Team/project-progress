@@ -66,6 +66,18 @@
 @import hexcolor;
 #endif
 
+#if __has_include(<share_plus/FLTSharePlusPlugin.h>)
+#import <share_plus/FLTSharePlusPlugin.h>
+#else
+@import share_plus;
+#endif
+
+#if __has_include(<url_launcher_ios/FLTURLLauncherPlugin.h>)
+#import <url_launcher_ios/FLTURLLauncherPlugin.h>
+#else
+@import url_launcher_ios;
+#endif
+
 @implementation GeneratedPluginRegistrant
 
 + (void)registerWithRegistry:(NSObject<FlutterPluginRegistry>*)registry {
@@ -79,6 +91,8 @@
   [FlutterNativeSplashPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterNativeSplashPlugin"]];
   [FluttertoastPlugin registerWithRegistrar:[registry registrarForPlugin:@"FluttertoastPlugin"]];
   [HexcolorPlugin registerWithRegistrar:[registry registrarForPlugin:@"HexcolorPlugin"]];
+  [FLTSharePlusPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTSharePlusPlugin"]];
+  [FLTURLLauncherPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTURLLauncherPlugin"]];
 }
 
 @end
