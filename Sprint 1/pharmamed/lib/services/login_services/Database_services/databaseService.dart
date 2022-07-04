@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pharmamed/models/carts.dart';
 import 'package:pharmamed/models/medicines.dart';
 import 'package:pharmamed/models/users.dart';
 import 'package:pharmamed/screens/add_medicine/add_medicineViewModel.dart';
@@ -24,6 +25,23 @@ class DatabaseServices {
 
     medicineList = List.from(data.docs.map((e) => Medicine.fromJson(e.data())));
     return medicineList;
+  }
+
+  Future getAllCartMedicines(List<Cart> cartIdList) async {
+    final String userId = FirebaseAuth.instance.currentUser!.uid;
+    final doc = await FirebaseFirestore.instance.doc('user/$userId').get();
+    final user = Users.fromJson(doc.data()!);
+    var cartId = user.cartId;
+
+    var data = await FirebaseFirestore.instance
+        .collection('carts')
+        .doc(cartId)
+        .collection('cartMedicine')
+        .get();
+
+    cartIdList = List.from(data.docs.map((e) => Cart.fromJson(e.data())));
+
+    return cartIdList;
   }
 
   Future addMedicines(String feedback, String path, String fileName) async {

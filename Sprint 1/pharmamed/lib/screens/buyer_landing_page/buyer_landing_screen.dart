@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:pharmamed/screens/checkout/checkout_screen.dart';
 import 'package:pharmamed/screens/login/login_Screen.dart';
 import 'package:pharmamed/screens/search_medicine/search_medicine.dart';
 
@@ -47,6 +48,17 @@ class _BuyerLandingPageState extends State<BuyerLandingPage> {
               );
             },
             child: const Text("Search Medicine"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const CheckOutView(),
+                ),
+              );
+            },
+            child: const Text("Check Out"),
           ),
         ],
       ),
