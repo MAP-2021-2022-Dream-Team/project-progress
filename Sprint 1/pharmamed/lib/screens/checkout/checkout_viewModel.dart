@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pharmamed/app/locator.dart';
 import 'package:pharmamed/models/carts.dart';
 import 'package:pharmamed/models/medicines.dart';
+import 'package:pharmamed/screens/order_page/order_page_screen.dart';
 import 'package:pharmamed/services/login_services/Database_services/databaseService.dart';
 import 'package:stacked/stacked.dart';
 
@@ -64,20 +65,25 @@ class CheckOutViewModel extends BaseViewModel {
 
   placeOrder(BuildContext context) {
     List<Medicine> selectedMedicines = [];
+    List<int> cnt = [];
 
     if (totalPrice > 0) {
       for (var i = 0; i < cartMedicineList.length; i++) {
         if (counter[i] > 0) {
           selectedMedicines.add(cartMedicineList[i]);
+          cnt.add(counter[i]);
         }
       }
 
-      //   Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (context) => ,
-      //   ),
-      // );
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => OrderView(
+              selectedMedicines: selectedMedicines,
+              cnt: cnt,
+              totalPrice: totalPrice),
+        ),
+      );
     }
   }
 }

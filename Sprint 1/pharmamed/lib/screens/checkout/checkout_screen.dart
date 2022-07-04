@@ -134,7 +134,9 @@ class CheckOutView extends StatelessWidget {
           },
         ),
         floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {},
+          onPressed: () {
+            model.placeOrder(context);
+          },
           label: const Text("Check Out"),
           backgroundColor: HexColor('#0D5F96'),
         ),
